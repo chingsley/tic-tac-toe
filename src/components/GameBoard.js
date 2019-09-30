@@ -7,39 +7,32 @@ class GameBoard extends Component {
     this.state = {
       gameOver: false,
       cells: ['0', '1', '2', '3', '4', '5', '6', '7', '8'],
-      manPlayTurn: false,
-      botPlayTurn: true,
-      botCellChoice: null,
+      manPlayTurn: true,
+      botPlayTurn: false,
+      botCellChoice: '9',
     };
   }
 
-  componentDidMount() {
-    // console.log('componentDidMount');
-  }
-
-  componentDidUpdate() {
-    // console.log('componentDidUpdate');
-    if (this.state.botPlayTurn) {
-      // console.log('bot play turn');
-      // implement bot play here
-    }
-  }
-
   togglePlayTurn = () => {
-
     this.setState(prevState => {
-      console.log(prevState);
-      const botCellChoice = prevState.manPlayTurn ? 7 : null;
       return {
         manPlayTurn: !prevState.manPlayTurn,
         botPlayTurn: !prevState.botPlayTurn,
-        botCellChoice: botCellChoice,
       };
     });
   };
 
+  makeBotPlay = () => {
+    this.setState(prevState => {
+      const botCellChoice = (Number(prevState.botCellChoice) - 1).toString();
+      return {
+        botCellChoice: botCellChoice,
+      };
+    });
+    setTimeout(() => this.togglePlayTurn(), 2000);
+  };
+
   render() {
-    // console.log('in gameboard', this.state);
     return(
       <div className="grid">
         {this.state.cells.map(
@@ -51,6 +44,7 @@ class GameBoard extends Component {
               manPlayTurn={this.state.manPlayTurn}
               togglePlayTurn={this.togglePlayTurn}
               botCellChoice={this.state.botCellChoice}
+              makeBotPlay={this.makeBotPlay}
             />
         )}
       </div>

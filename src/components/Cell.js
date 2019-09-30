@@ -5,25 +5,59 @@ class Cell extends React.Component {
     super(props);
     this.state = {
       marker: '',
+      available: true,
     };
   }
   
-  play = () => {
+  play = async () => {
     // console.log(this.state);
-    this.setState({ marker: this.props.manPlayTurn ? 'x' : 'o' });
-    
-    setTimeout(() => {this.props.togglePlayTurn()}, 1000);
+    this.setState({
+      marker: 'x',
+      available: false,
+    });
+    await this.props.togglePlayTurn();
+    // await this.props.makeBotPlay();
+  
+    setTimeout(() => {this.props.makeBotPlay()}, 2000);
+    // setTimeout(() => {this.props.togglePlayTurn()}, 1000);
   };
+
+  // shouldComponentUpdate() {
+  //   if (this.props.botPlayTurn) {
+
+  //   }
+  // }
+
+  componentDidMount() {
+    if (this.props.botPlayTurn && this.props.cellNumber === this.props.botCellChoice) {
+      this.setState({available: false});
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.botPlayTurn && this.props.cellNumber === this.props.botCellChoice) {
+      this.setState({ available: false });
+      // this.props.togglePlayTurn();
+    }
+  }
+
+  shouldComponentUpdate() {
+    if(this.state.available) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   
   render() {
-    console.log(this.props.botCellChoice);
+    const m = this.state.marker;
     return (
       <div
-        className={`cell ${this.state.marker}`}
+        className={`cell ${(this.props.botPlayTurn && this.props.cellNumber === this.props.botCellChoice) ? 'o' : m}`}
         id={this.props.cellNumber}
         onClick={this.play}
       >
-        {this.state.marker}
+        {(this.props.botPlayTurn && this.props.cellNumber === this.props.botCellChoice) ? 'o' : m }
       </div>
     );
   }
