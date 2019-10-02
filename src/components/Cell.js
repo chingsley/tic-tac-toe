@@ -9,24 +9,20 @@ class Cell extends React.Component {
     };
   }
   
-  play = async () => {
-    // console.log(this.state);
+  play = () => {
+    if(!this.state.available) {
+      return;
+    }
     this.setState({
       marker: 'x',
       available: false,
     });
-    await this.props.togglePlayTurn();
-    // await this.props.makeBotPlay();
+    this.props.togglePlayTurn();
+    this.props.updateAvailableCells(this.props.cellNumber);
   
-    setTimeout(() => {this.props.makeBotPlay()}, 2000);
-    // setTimeout(() => {this.props.togglePlayTurn()}, 1000);
+    setTimeout(() => {this.props.makeBotPlay()}, 500);
   };
 
-  // shouldComponentUpdate() {
-  //   if (this.props.botPlayTurn) {
-
-  //   }
-  // }
 
   componentDidMount() {
     if (this.props.botPlayTurn && this.props.cellNumber === this.props.botCellChoice) {
@@ -37,7 +33,6 @@ class Cell extends React.Component {
   componentDidUpdate() {
     if (this.props.botPlayTurn && this.props.cellNumber === this.props.botCellChoice) {
       this.setState({ available: false });
-      // this.props.togglePlayTurn();
     }
   }
 
