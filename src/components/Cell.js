@@ -10,15 +10,14 @@ class Cell extends React.Component {
   }
   
   play = () => {
-    if(!this.state.available) {
+    if(!this.state.available || this.props.isGameOver) {
       return;
     }
     this.setState({
       marker: 'x',
       available: false,
     });
-    this.props.togglePlayTurn();
-    this.props.updateAvailableCells(this.props.cellNumber);
+    this.props.updateBoardState(this.props.cellNumber, 'x');
   
     setTimeout(() => {this.props.makeBotPlay()}, 500);
   };
@@ -45,14 +44,14 @@ class Cell extends React.Component {
   }
   
   render() {
-    const m = this.state.marker;
+    const x = this.state.marker;
     return (
       <div
-        className={`cell ${(this.props.botPlayTurn && this.props.cellNumber === this.props.botCellChoice) ? 'o' : m}`}
+        className={`cell ${(this.props.botPlayTurn && this.props.cellNumber === this.props.botCellChoice) ? 'o' : x}`}
         id={this.props.cellNumber}
         onClick={this.play}
       >
-        {(this.props.botPlayTurn && this.props.cellNumber === this.props.botCellChoice) ? 'o' : m }
+        {(this.props.botPlayTurn && this.props.cellNumber === this.props.botCellChoice) ? 'o' : x }
       </div>
     );
   }
