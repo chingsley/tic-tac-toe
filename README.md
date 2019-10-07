@@ -1,10 +1,12 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cc5e5490-a829-4743-86c8-0689039dc378/deploy-status)](https://app.netlify.com/sites/chingsley-tic-tac-toe/deploys)
+
 ## Description
 
 This App is a React implementation of the the tic tac toe game.
-Click [here](https://wizardly-lichterman-db165b.netlify.com/) to play.
+Click [here](https://chingsley-tic-tac-toe.netlify.com/) to play.
 
 ## Depoyed at
-`https://wizardly-lichterman-db165b.netlify.com/`
+https://chingsley-tic-tac-toe.netlify.com/
 
 ### `How to manually test`
 
