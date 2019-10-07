@@ -1,6 +1,10 @@
 ## Description
 
 This App is a React implementation of the the tic tac toe game.
+Click [here](https://wizardly-lichterman-db165b.netlify.com/) to play.
+
+## Depoyed at
+`https://wizardly-lichterman-db165b.netlify.com/`
 
 ### `How to manually test`
 
